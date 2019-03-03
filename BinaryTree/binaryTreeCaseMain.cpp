@@ -61,8 +61,15 @@ int binaryTreeCaseMain() {
 
 	//图形直观显示二叉树
 	intTree.DisplayBinaryTree();
+	cout << "中序：";
 
-	
+	intTree.InOrderListTree();
+	cout << "前序：";
+	intTree.PreOrderListTree();
+	cout << "后序：";
+	intTree.PostOrderListTree();
+	cout << "层序：";
+	intTree.LayerOrderListTree();
 
 	
 	return 0;

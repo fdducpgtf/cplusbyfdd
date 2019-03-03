@@ -1,0 +1,33 @@
+git add ……
+git commit -m ""
+git push origin master
+git push
+
+git status
+git branch
+git branch -r
+git branch -a
+
+git branch -b 分支名字
+git branch -d 分支名字
+git checkout -b 分支名字
+git checkout master
+git checkout 分支名字
+
+git push origin --delete 分支名字
+git push origin 分支名字
+
+git pull
+
+git push
+
+git merge 分支名字
+
+git merge --abort
+
+git clone [url]
+
+
+ssh-keygen -t rsa -C "419513499@qq.com"
+git config [--global] user.name "[name]"
+git config [--global] user.email "[email address]"

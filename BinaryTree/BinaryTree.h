@@ -23,8 +23,8 @@ private:
 	int CountLeaf(BiTNode<T> *root);
 
 
-	void AddInfoToBiTNode(BiTNode<T> *p);
-	void CreateTree(BiTNode<T> *root);
+	void AddInfoToBiTNode(BiTNode<T> *p,bool isNew=true);
+	void CreateTree(BiTNode<T> *root,bool isNew=true);
 	void ManualCreate(BiTNode<T> *p);
 
 	
@@ -66,14 +66,18 @@ public:
 
 
 template<typename T>
-void BinaryTree<T>::AddInfoToBiTNode(BiTNode<T> *p) {
+void BinaryTree<T>::AddInfoToBiTNode(BiTNode<T> *p,bool isNew) {
 
 	//复制p为根结点的树，并添加BiTNode相关变量信息。
 	Queue<BiTNode<T> *> qbit;
 	BiTNode<T> *bitNode,*childNode;
 	if (p) {
 		//根结点复制
-		root = new BiTNode<T>;
+		if (isNew)
+			root = new BiTNode<T>;
+		else
+			root = p;
+
 		root->data = p->data;
 		root->depth = 1;
 		//ordero为节点序号。节点序号编排原则：从0开始；空节点也要占据相应位置。非实际节点序号。
@@ -87,7 +91,12 @@ void BinaryTree<T>::AddInfoToBiTNode(BiTNode<T> *p) {
 			bitNode = qbit.QDelete();
 			//根据父结点，创建左子节点并添加相关信息。
 			if (bitNode->Lchild) {
-				childNode = new BiTNode<T>;
+				if (isNew)
+					childNode = new BiTNode<T>;
+				else
+					childNode = bitNode->Lchild;
+
+
 				childNode->data = bitNode->Lchild->data;
 				childNode->depth = bitNode->depth + 1;
 				childNode->parent = bitNode;
@@ -103,8 +112,12 @@ void BinaryTree<T>::AddInfoToBiTNode(BiTNode<T> *p) {
 			}
 			//根据父结点，创建右子节点并添加相关信息。
 			if (bitNode->Rchild) {
+				if (isNew)
+					childNode = new BiTNode<T>;
+				else
+					childNode = bitNode->Rchild;
 
-				childNode = new BiTNode<T>;
+
 				childNode->data = bitNode->Rchild->data;
 				childNode->depth = bitNode->depth + 1;
 				childNode->parent = bitNode;
@@ -127,16 +140,16 @@ void BinaryTree<T>::AddInfoToBiTNode(BiTNode<T> *p) {
 
 
 template<typename T>
-void BinaryTree<T>::CreateTree(BiTNode<T> *root) {
-	AddInfoToBiTNode(root);
+void BinaryTree<T>::CreateTree(BiTNode<T> *root,bool isNew) {
+	AddInfoToBiTNode(root,isNew);
 }
 
 template<typename T>
 void BinaryTree<T>::ReCreateTree(void) {
 	BiTNode<T> *temp=root;
 	root = NULL;
-	CreateTree(temp);
-	DeleteTree(temp);
+	CreateTree(temp,false);
+	
 
 }
 
