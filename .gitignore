@@ -1,6 +1,0 @@
-#忽略fdd的文件,不忽略fdd里的所有文件夹
-fdd.vcxproj*
-#忽略git文件夹
-.gitignore
-#忽略当前目录下的debug文件夹
-debug/
