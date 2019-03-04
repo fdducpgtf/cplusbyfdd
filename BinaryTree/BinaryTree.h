@@ -4,6 +4,7 @@
 #include "BiTNode.h"
 #include "../Queue/Queue.h"
 #include "PrintLine.h"
+#include "../DLinkedList/DLinkedList.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ private:
 	void AddInfoToBiTNode(BiTNode<T> *p,bool isNew=true);
 	void CreateTree(BiTNode<T> *root,bool isNew=true);
 	void ManualCreate(BiTNode<T> *p);
-
+	void InOrderForSort(BiTNode<T> *rootBiTNode, Queue<BiTNode<T>*>& qbit);
 	
 
 
@@ -39,6 +40,8 @@ public:
 	bool InsertTwoBiTNode(T& parentitem, T& leftchilditem, T& rightchilditem);
 	void ReCreateTree(void);
 	void CreateTreeBy(BiTNode<T> *p);
+	void CreateTreeFrom(T *arr, int size);
+
 	void DeleteTree(BiTNode<T> *root);
 
 	int GetDepth();
@@ -48,7 +51,7 @@ public:
 	void LayerOrderListTree(void);
 	void InOrderListTree(void);
 	void PostOrderListTree(void);
-
+	
 	void ManualCreateTree(void);
 
 	void DisplayBinaryTree(void);
@@ -56,8 +59,9 @@ public:
 	BiTNode<T> *GetRootBiTNode(void)const;
 	BiTNode<T> *GetBiTNode(T& item);
 	BiTNode<T> *GetBiTNodeByParent(T& parentitem,bool isLeft=true);
-
-
+	
+	void BinarySortTree(void);
+	
 
 };
 
@@ -168,6 +172,54 @@ void BinaryTree<T>::CreateTreeBy(BiTNode<T> *p) {
 	CreateTree(p);
 }
 
+
+template<typename T>
+void BinaryTree<T>::CreateTreeFrom(T *arr,int size) {
+	Queue<BiTNode<T>*> qbit;
+	
+	int i = 0;
+	if (i < size) {
+		if (root)
+			DeleteTree(root);
+		root = new BiTNode<T>;
+		root->data = *(arr+i);
+		i++;
+		root->depth = 1;
+		root->order = 0;
+		root->parent = NULL;
+		qbit.QInsert(root);
+
+		while (!(qbit.QEmpty())) {
+			BiTNode<T> *p = qbit.QDelete();
+			if ((!p->Lchild) && (i < size)) {
+				p->Lchild = new BiTNode<T>;
+				p->Lchild->data = *(arr+i);
+				i++;
+				p->Lchild->depth = p->depth + 1;
+				p->Lchild->order = 2 * p->order;
+				p->Lchild->parent = p;
+			}
+			if (i < size)
+				qbit.QInsert(p->Lchild);
+
+			if ((!p->Rchild) && (i < size)) {
+				p->Rchild = new BiTNode<T>;
+				p->Rchild->data = *(arr+i);
+				i++;
+				p->Rchild->depth = p->depth + 1;
+				p->Rchild->order = 2 * p->order + 1;
+				p->Rchild->parent = p;
+			}
+
+			if (i < size)
+				qbit.QInsert(p->Rchild);
+
+
+		}
+
+	}
+}
+
 template<typename T>
 BinaryTree<T>::~BinaryTree() {
 	DeleteTree(root);
@@ -258,14 +310,18 @@ void BinaryTree<T>::PreOrder(BiTNode<T> *root) {
 //中序遍历二叉树
 template<typename T>
 void BinaryTree<T>::InOrder(BiTNode<T> *root) {
+	
 	if (root) {
 		if (root->Lchild) 
 			InOrder(root->Lchild);
+
 		cout << root->data<<" ";
+
 		if (root->Rchild)
 			InOrder(root->Rchild);
 		
 	}
+	
 }
 template<typename T>
 void BinaryTree<T>::InOrderListTree(void) {
@@ -661,5 +717,42 @@ void BinaryTree<T>::DisplayBinaryTree(void) {
 		oss.str("");
 		//输出最后一个换行符。
 		cout << endl;
+	}
+}
+
+
+
+
+//构建有大小顺序的二叉树
+
+template<typename T>
+void BinaryTree<T>::BinarySortTree(void) {
+	Queue<BiTNode<T>*> qbit, qtmp;
+	DLinkedList<T> list;
+
+	InOrderForSort(root, qbit);
+	while (!qbit.QEmpty()) {
+		BiTNode<T> *p = qbit.QDelete();
+		list.InsertOrder(p->data);
+		qtmp.QInsert(p);
+	}
+	DNode<T> *listhead = list.Head();
+	while (!qtmp.QEmpty()) {
+		BiTNode<T> *p = qtmp.QDelete();
+		p->data = listhead->NextNodeRight()->data;
+		list.DeleteFront();
+	}
+	listhead = NULL;
+}
+
+template<typename T>
+void BinaryTree<T>::InOrderForSort(BiTNode<T> *rootBiTNode, Queue<BiTNode<T>*>& qbit) {
+	if (rootBiTNode) {
+		if (rootBiTNode->Lchild)
+			InOrderForSort(rootBiTNode->Lchild, qbit);
+		qbit.QInsert(rootBiTNode);
+
+		if (rootBiTNode->Rchild)
+			InOrderForSort(rootBiTNode->Rchild, qbit);
 	}
 }

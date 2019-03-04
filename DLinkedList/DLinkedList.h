@@ -534,39 +534,7 @@ void DLinkedList<T>::InsertDescending(T& item) {
 	//希尔插入排序法
 	template<typename T>
 	void DLinkedList<T>::ShellInsertSort(bool Ascending) {
-		//不好操作
-		//参考以下代码的原理，以下与本表无关。
-		int a[] = { 1,12,3,-4,12,19,12,4 ,2 };
-		int size = 9;
-
-
-		int temp, pos;
-
-		int d = size;
-		do {
-			d = d / 3 + 1;
-			for (int i = d;i < size;i++) {
-				temp = a[i];
-				pos = i - d;
-				while ((pos >= 0) && (temp < a[pos])) {
-					a[pos + d] = a[pos];
-					pos -= d;
-
-				}
-				a[pos + d] = temp;
-
-			}
-
-
-		} while (d > 1);
-
-		cout << endl;
-
-		for (int i = 0;i < size;i++)
-			cout << a[i] << " ";
 		
-
-		cout << endl;
 
 
 	}
