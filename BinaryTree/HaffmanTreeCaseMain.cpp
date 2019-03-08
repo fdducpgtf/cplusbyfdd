@@ -1,4 +1,6 @@
 #include <iostream>
+#include"BinaryTree.h"
+
 
 using namespace std;
 const int MaxValue = 10000;//初始设定的权值最大值
@@ -65,6 +67,8 @@ void Haffman(int weight[], int n, HaffNode haffTree[])
 		haffTree[n + i].leftChild = x1;
 		haffTree[n + i].rightChild = x2;
 	}
+
+	
 }
 void HaffmanCode(HaffNode haffTree[], int n, Code haffCode[])
 //由n个结点的哈夫曼树haffTree构造哈夫曼编码haffCode
@@ -101,8 +105,8 @@ void HaffmanCode(HaffNode haffTree[], int n, Code haffCode[])
 	}
 }
 int HaffmanTreeCaseMain()
-{
-	cout << "HallmanTreeCaseMain!" << endl;
+{  
+	
 	int i, j, n = 4, m = 0;
 	int weight[] = { 2,4,5,7 };
 	HaffNode*myHaffTree = new HaffNode[2 * n - 1];
@@ -113,10 +117,35 @@ int HaffmanTreeCaseMain()
 		exit(0);
 	}
 	Haffman(weight, n, myHaffTree);
+	//把霍夫曼树形成真正的二叉树并显示出来-------------------------------------------
+	BiTNode<int> *bita[7];
+	BiTNode<int> *root = NULL;
+	for (int i = 0; i < 2 * n - 1; i++) {
+		bita[i] = new BiTNode<int>;
+		bita[i]->data = i;
+	}
+
+	for (int i = 0; i < 2 * n - 1; i++) {
+		if (myHaffTree[i].parent != 0)
+			bita[i]->parent = bita[myHaffTree[i].parent];
+		else
+			root = bita[i];
+
+		if (myHaffTree[i].leftChild != -1)
+			bita[i]->Lchild = bita[myHaffTree[i].leftChild];
+		if (myHaffTree[i].rightChild != -1)
+			bita[i]->Rchild = bita[myHaffTree[i].rightChild];
+	}
+
+	BinaryTree<int> tree(root);
+	tree.DisplayBinaryTree();
+	//--------------------------------------------------------------------------------------
+
 	HaffmanCode(myHaffTree, n, myHaffCode);
 	//输出每个叶结点的哈夫曼编码
 	for (i = 0; i < n; i++)
 	{
+		cout << "i: "<<i<<" start:"<<myHaffCode[i].start << endl;
 		cout << "Weight=" << myHaffCode[i].weight << "  Code=";
 		//for(j=myHaffCode[i].start+1;j<n;j++)
 		for (j = 0; j < myHaffCode[i].start; j++)
