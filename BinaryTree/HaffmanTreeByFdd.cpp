@@ -1,16 +1,17 @@
 #include<iostream>
 #include<list>
 #include "HaffBiTNode.h"
+#include "BinaryTree.h"
 
 using namespace std;
 
-int CalculateWeight(HaffBiTNode<int> *hp);
+int CalculateWeight(BiTNode<int> *hp);
 
-int main() {
+int HaffmanTreeByFdd() {
 	
 	list<HaffBiTNode<int>> mylist;
-	const int n = 4;
-	int weight[n] = { 2,4,5,7 };
+	const int n = 8;
+	int weight[n] = { 5,29,7,8,14,23,3,11 };
 
 	cout << "叶子节点：";
 	for (int i = 0;i < n;i++) {
@@ -50,7 +51,7 @@ int main() {
 		
 		
 		for (it = mylist.begin();it != mylist.end();it++) {
-			if (*it >= *p)
+			if (*it > *p)
 				break;
 		}
 		mylist.insert(it, *p);
@@ -66,10 +67,14 @@ int main() {
 
 	cout <<"霍夫曼树叶子节点权重:"<< CalculateWeight(p) << endl;
 
+	BinaryTree<int> tree(p);
+	tree.DisplayBinaryTree();
+
+
 	return 0;
 }
 
-int CalculateWeight(HaffBiTNode<int> *hp) {
+int CalculateWeight(BiTNode<int> *hp) {
 	static int depth = 0;
 	if (hp) {
 

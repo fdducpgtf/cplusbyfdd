@@ -1,16 +1,17 @@
 #pragma once
 #include<iostream>
+#include "BiTNode.h"
 using namespace std;
 
 
 
 template<typename T>
-struct HaffBiTNode
+struct HaffBiTNode:BiTNode<T>
 {
-	T data;
+	/*T data;
 	HaffBiTNode<T> *Lchild=NULL;
 	HaffBiTNode<T> *Rchild = NULL;
-	HaffBiTNode<T> *parent = NULL;
+	HaffBiTNode<T> *parent = NULL;*/
 
 	friend ostream &operator<<(ostream &cout, HaffBiTNode<T>& hbit) {
 		cout<<hbit.data;
