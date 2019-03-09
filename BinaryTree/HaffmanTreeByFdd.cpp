@@ -73,21 +73,14 @@ int CalculateWeight(HaffBiTNode<int> *hp) {
 	static int depth = 0;
 	if (hp) {
 
-		if (!hp->Lchild && !hp->Rchild) {
-			return hp->data*depth;
-		}
-		else if (!hp->Lchild&&hp->Rchild) {
+		if (hp->Lchild || hp->Rchild) {
 			depth++;
-			return CalculateWeight(hp->Rchild);
-		}
-		else if (hp->Lchild && !hp->Rchild) {
-			depth++;
-			return CalculateWeight(hp->Lchild);
+			return ((hp->Lchild ? CalculateWeight(hp->Lchild) : 0) + (hp->Rchild ? CalculateWeight(hp->Rchild): 0));
 		}
 		else {
-			depth++;
-			return CalculateWeight(hp->Lchild) + CalculateWeight(hp->Rchild);
+			return hp->data*depth;
 		}
+
 
 	}
 	else {
