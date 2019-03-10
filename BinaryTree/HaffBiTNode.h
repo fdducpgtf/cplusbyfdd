@@ -47,6 +47,12 @@ struct HaffBiTNode:BiTNode<T>
 
 		return this->data == hbit.data;
 	}
+	bool operator!=(const HaffBiTNode<T> &hbit) const {
+
+
+		return this->data != hbit.data;
+	}
+
 
 };
 

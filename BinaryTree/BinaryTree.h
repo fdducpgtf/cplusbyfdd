@@ -677,14 +677,14 @@ void BinaryTree<T>::DisplayBinaryTree(void) {
 				//开始输出节点对应的符号-------------------------------------------------------
 				if (p != root) {
 					//获取当前节点对应的要添加的符号类型。类型定义见：LineType
-					LineType Ltype = PrintLine<int>::GetLineType(p);
+					LineType Ltype = PrintLine<T>::GetLineType(p);
 					//分情况输出符号
 					if (p->depth != pre->depth) {
 						//每层第一个节点或前面节点都是空节点之后的第一个节点
 						PrintLine<int>::Print(totalwidth, deltawidth, distance, Ltype);
 					}
 					else {
-						if (PrintLine<int>::GetLineType(pre) == LineType::Lline) {
+						if (PrintLine<T>::GetLineType(pre) == LineType::Lline) {
 							//只有左节点，没有右节点
 							PrintLine<int>::Print(totalwidth + distance - deltawidth / 2, deltawidth, distance, Ltype);
 						}

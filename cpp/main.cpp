@@ -19,7 +19,8 @@
 //extern int binaryTreeCaseMain();
 //extern int DisplayBinary_TestMain();
 //extern int HaffmanTreeCaseMain();
-extern int HaffmanTreeByFdd();
+//extern int HaffmanTreeByFdd();
+extern int createBinaryTreeFromPreAndInOrder();
  int main(int argc,char* argv[]) {
 
 	 
@@ -34,7 +35,9 @@ extern int HaffmanTreeByFdd();
 
 
 //此处执行外部函数
-	 return  HaffmanTreeByFdd();
+
+	 return createBinaryTreeFromPreAndInOrder();
+	 //return  HaffmanTreeByFdd();
 	 //return  HaffmanTreeCaseMain();
 	 //return DisplayBinary_TestMain();
 
