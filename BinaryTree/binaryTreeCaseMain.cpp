@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<sstream>
+#include<vector>
 #include "BiTNode.h"
 #include "BinaryTree.h"
 #include "../Queue/Queue.h"
@@ -16,6 +17,9 @@ using namespace std;
 
 //--------------------------------------------------------------------------------------
 int binaryTreeCaseMain() {
+
+	
+
 	
 	
 	//根据数组创建一个二叉树

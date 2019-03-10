@@ -13,7 +13,7 @@ int createBinaryTreeFromPreAndInOrder() {
 
 	//设定二叉树节点值的类型
 	using elemType = int;
-	//二叉树的前序：元值要保持不等，否则程序查找时会出错。
+	//二叉树的前序：元素值要保持不等，否则程序查找时会出错。
 	vector<elemType> preOrderVector = { 1,2,4,5,6,3,7,8,9 }; //char型也可以。{ 'A','B','C','D','E','F','G' };
 	//二叉树的中序：元素值要保持不等，否则程序查找时会出错。
 	vector<elemType> inOrderVector = { 4,2,5,6,1,7,3,9,8 };//char型也可以。{ 'C','B','E','D','A','F','G' };

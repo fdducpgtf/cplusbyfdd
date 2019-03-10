@@ -16,11 +16,11 @@
 //extern int queueTestCaseMain();
 //extern int radixSortCaseMain();
 
-//extern int binaryTreeCaseMain();
+extern int binaryTreeCaseMain();
 //extern int DisplayBinary_TestMain();
 //extern int HaffmanTreeCaseMain();
 //extern int HaffmanTreeByFdd();
-extern int createBinaryTreeFromPreAndInOrder();
+//extern int createBinaryTreeFromPreAndInOrder();
  int main(int argc,char* argv[]) {
 
 	 
@@ -36,12 +36,12 @@ extern int createBinaryTreeFromPreAndInOrder();
 
 //此处执行外部函数
 
-	 return createBinaryTreeFromPreAndInOrder();
+	 //return createBinaryTreeFromPreAndInOrder();
 	 //return  HaffmanTreeByFdd();
 	 //return  HaffmanTreeCaseMain();
 	 //return DisplayBinary_TestMain();
 
-	 //return  binaryTreeCaseMain();
+	 return  binaryTreeCaseMain();
 
 	 //return  radixSortCaseMain();
 
