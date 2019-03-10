@@ -683,16 +683,16 @@ void BinaryTree<T>::DisplayBinaryTree(void) {
 					//分情况输出符号
 					if (p->depth != pre->depth) {
 						//每层第一个节点或前面节点都是空节点之后的第一个节点
-						PrintLine<int>::Print(totalwidth, deltawidth, distance, Ltype);
+						PrintLine<T>::Print(totalwidth, deltawidth, distance, Ltype);
 					}
 					else {
 						if (PrintLine<T>::GetLineType(pre) == LineType::Lline) {
 							//只有左节点，没有右节点
-							PrintLine<int>::Print(totalwidth + distance - deltawidth / 2, deltawidth, distance, Ltype);
+							PrintLine<T>::Print(totalwidth + distance - deltawidth / 2, deltawidth, distance, Ltype);
 						}
 						else {
 							//除以上两种情况以外的情况
-							PrintLine<int>::Print(totalwidth + 2 * distance, deltawidth, distance, Ltype);
+							PrintLine<T>::Print(totalwidth + 2 * distance, deltawidth, distance, Ltype);
 						}
 					}
 
