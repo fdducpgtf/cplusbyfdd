@@ -28,7 +28,6 @@ int binaryTreeCaseMain() {
 	for (int i = 0;i < size;i++)
 		a[i] = i;
 
-
 	
 	//通过数组的方式创建新的二叉树
 	BinaryTree<int> intTree;
